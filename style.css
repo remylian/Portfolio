@@ -1,0 +1,208 @@
+@import url(./Css/partials/reset.css);
+@import url(./Css/partials/header.css);
+
+body {
+	background-image: url(img/dark-oak.png);
+	background-size: cover;
+}
+
+main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+
+	margin: 0;
+}
+
+h1,
+h2 {
+	text-align: center;
+}
+.container-about-me {
+	width: 200px;
+	height: 300px;
+	background-color: white;
+}
+.container-info {
+	font-family: monospace;
+	font-size: 1.125rem;
+	transform: translateX(-300px) rotate(15deg);
+	border-radius: 0.25rem;
+	width: 100%;
+	max-width: 500px;
+	height: 300px;
+	background-image: url(img/info-note.png);
+}
+
+.deck {
+	width: 200px;
+	height: 300px;
+	position: relative;
+}
+.deck-cover {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-image: url(img/book-cover.png);
+	cursor: pointer;
+}
+.deck-cover-title {
+	padding-block: 1rem;
+	background-color: #4b4c50;
+	opacity: 0.9;
+	color: aliceblue;
+}
+.card {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	border: 1px solid #8b8b8b;
+	background-color: white;
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	transition: transform 0.5s ease;
+	overflow: hidden;
+}
+
+.card-1 img {
+	background-color: #0a3641;
+}
+.card-2 h2 {
+	color: #e0dfd5;
+	margin-bottom: 0;
+}
+
+.card-3 h2 {
+	margin-bottom: 0;
+}
+
+.card img {
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+}
+
+/* Stacking order */
+.card:nth-child(1) {
+	z-index: 4;
+}
+.card:nth-child(2) {
+	background-color: #9bb3b3;
+	z-index: 3;
+}
+.card:nth-child(3) {
+	background-color: #262d32;
+	z-index: 1;
+}
+
+.card:nth-child(4) {
+	z-index: 2;
+}
+
+/* Active State: unfold:  */
+.deck.active .card:nth-child(1) {
+	transform: translateY(300px) rotate(90deg);
+	/* opacity: 0; */
+	transition: 0.8s ease;
+}
+.deck.active .card:nth-child(2) {
+	transform: translateX(-200px) rotate(-30deg);
+	transition: 0.8s ease;
+}
+.deck.active .card:nth-child(3) {
+	transform: translateX(200px) rotate(70deg);
+	transition: 0.8s ease;
+}
+.deck.active .card:nth-child(4) {
+	transform: translateX(20px) rotate(5deg);
+}
+
+/* Highlight (pull further out) the card currently being hovered */
+.deck.active .card:nth-child(2):hover {
+	transform: translateX(-200px) translateY(-3rem);
+}
+.deck.active .card:nth-child(3):hover {
+	transform: translateY(-3rem) translateX(250px);
+}
+.deck.active .card:nth-child(4):hover {
+	transform: translateY(-3rem) rotate(-20deg);
+}
+
+.card .links {
+	position: absolute;
+	bottom: 1rem;
+	left: 0;
+	right: 0;
+	display: flex;
+	justify-content: space-around;
+	text-align: center;
+	gap: 0.5rem;
+	opacity: 0;
+	transform: translateY(1rem);
+	transition: opacity 0.3s ease, transform 0.3s ease;
+	pointer-events: none; /* Links inactive until revealed */
+}
+
+/* Reveal links on hover when deck is active (excluding the deck cover) */
+.deck.active .card:not(.deck-cover):hover .links {
+	opacity: 1;
+	transform: translateY(0);
+	pointer-events: auto; /* Now links become clickable */
+}
+
+.links a,
+.links button {
+	text-decoration: none;
+	border: 1px solid #ccc;
+	padding: 0.2rem 0.5rem;
+	border-radius: 4px;
+	font-size: 0.8rem;
+	transition: 0.5s ease;
+}
+
+.link-1 {
+	font-weight: bold;
+	background-color: #0a3641;
+	color: #fbaf00;
+}
+.link-1:hover {
+	font-weight: bold;
+	background-color: #fbaf00;
+	color: #0a3641;
+	border: 0.5px solid #0a3641;
+	opacity: 0.8;
+}
+
+.link-2 {
+	background-color: #e0dfd5;
+	color: #262d32;
+	border: 1px solid #b7b8c0;
+	transition: 0.5s;
+}
+
+.link-2:hover {
+	background-color: #e0e2f0;
+	box-shadow: 0 0 0.5rem #f7f6f2;
+	transition: 0.3s;
+}
+
+.link-3 {
+	background-color: #0b4d41;
+	color: whitesmoke;
+	transition: 0.4s;
+}
+
+.link-3:hover {
+	background-color: white;
+	color: #0b4d41;
+	box-shadow: 2px 2px 2px #13212c;
+	transition: 0.4s ease;
+}
+
+.container-info p {
+	font-size: 1.125rem;
+	padding-left: 1rem;
+}
