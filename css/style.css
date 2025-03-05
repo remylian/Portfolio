@@ -1,5 +1,5 @@
-@import url(./Css/partials/reset.css);
-@import url(./Css/partials/header.css);
+@import url(./css/partials/reset.css);
+@import url(./css/partials/header.css);
 
 body {
 	background-image: url(img/dark-oak.png);
