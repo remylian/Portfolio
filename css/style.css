@@ -81,12 +81,19 @@ main {
 .card-1 img {
 	background-color: #0a3641;
 }
+
+.card-1 h2 {
+	font-family: 'girassol', serif;
+}
+
 .card-2 h2 {
+	font-family: 'oldenburg', serif;
 	color: #e0dfd5;
 	margin-bottom: 0;
 }
 
 .card-3 h2 {
+	font-family: 'Fuzzy Bubbles', sans-serif;
 	margin-bottom: 0;
 }
 
@@ -176,6 +183,7 @@ main {
 
 .link-1 {
 	font-weight: bold;
+	font-family: 'girassol', serif;
 	background-color: #0a3641;
 	color: #fbaf00;
 }
@@ -188,9 +196,11 @@ main {
 }
 
 .link-2 {
+	font-family: 'oldenburg', serif;
 	background-color: #e0dfd5;
 	color: #262d32;
 	border: 1px solid #b7b8c0;
+	font-family: 'Fuzzy Bubbles', sans-serif;
 	transition: 0.5s;
 }
 
