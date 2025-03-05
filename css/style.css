@@ -1,9 +1,25 @@
 @import url(./css/partials/reset.css);
 @import url(./css/partials/header.css);
 
+header {
+	background-image: url(../img/header-bg.png);
+}
+
+h1 {
+	font-family: monospace;
+	font-size: 2.5rem;
+	color: #4b4c50;
+	margin: 0;
+	padding-block: 2rem;
+}
 body {
 	background-image: url(../img/dark-oak.png);
 	background-size: cover;
+}
+
+h1,
+h2 {
+	text-align: center;
 }
 
 main {
@@ -15,10 +31,6 @@ main {
 	margin: 0;
 }
 
-h1,
-h2 {
-	text-align: center;
-}
 .container-about-me {
 	width: 200px;
 	height: 300px;
