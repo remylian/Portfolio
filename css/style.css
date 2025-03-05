@@ -2,7 +2,7 @@
 @import url(./css/partials/header.css);
 
 body {
-	background-image: url(img/dark-oak.png);
+	background-image: url(../img/dark-oak.png);
 	background-size: cover;
 }
 
@@ -32,7 +32,7 @@ h2 {
 	width: 100%;
 	max-width: 500px;
 	height: 300px;
-	background-image: url(img/info-note.png);
+	background-image: url(../img/info-note.png);
 }
 
 .deck {
@@ -44,7 +44,7 @@ h2 {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	background-image: url(img/book-cover.png);
+	background-image: url(../img/book-cover.png);
 	cursor: pointer;
 }
 .deck-cover-title {
