@@ -1,7 +1,9 @@
+import { displayAboutMeInfo } from './aboutMe.mjs';
 import { displayProjectInfo } from './projectInfo.mjs';
 
 document.addEventListener('DOMContentLoaded', () => {
 	displayProjectInfo();
+	displayAboutMeInfo();
 
 	const deck = document.getElementById('deck');
 	const deckCover = deck.querySelector('.deck-cover');

@@ -3,17 +3,17 @@
 header {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 	justify-content: center;
+	align-items: center;
 	background-image: url(../img/header-bg.png);
 }
 
 h1 {
-	font-family: monospace;
-	font-size: 2.5rem;
-	color: #4b4c50;
-	margin: 0;
 	padding-block: 2rem;
+	margin: 0;
+	font-size: 2.5rem;
+	font-family: 'Diplomata', serif;
+	color: #333436;
 }
 body {
 	background-image: url(../img/dark-oak.png);
@@ -34,29 +34,44 @@ main {
 
 footer {
 	padding-block: 3rem;
-	text-align: center;
 	width: 100%;
 	height: auto;
 	background-image: url(../img/header-bg.png);
+	text-align: center;
 }
 .container-about-me {
-	font-family: monospace;
+	width: 100%;
+	max-width: 12.5rem;
+	height: auto;
+	padding: 1rem;
+	transition: 0.7s;
+	background-color: white;
+	background-image: url(../img/info-note.png);
 	border: 0.5px solid #4b4c50;
 	border-radius: 0.25rem;
-	width: 100%;
-	max-width: 200px;
-	height: 300px;
-	background-color: white;
-	transition: 0.7s;
-	background-image: url(../img/info-note.png);
-	padding-left: 1rem;
+	font-family: monospace;
 }
 
 .container-about-me.active {
-	transform: translate(20rem, -15rem);
+	transform: translate(23rem, -13.5rem);
 	transition: 0.7s;
 }
 
+.info-wrapper {
+	display: flex;
+	flex-direction: column;
+	object-fit: contain;
+	transition: 0.7s;
+}
+.info-wrapper button {
+	font-family: monospace;
+	/* font-size: 1.125rem; */
+}
+.info-wrapper p {
+	display: flex;
+	justify-content: start;
+	padding-block: 0.25rem;
+}
 .about img,
 .about button {
 	width: 100%;
@@ -65,30 +80,36 @@ footer {
 }
 
 .about-img {
-	border-radius: 50%;
 	border: 0.5px solid #4b4c50;
+	border-radius: 50%;
 }
 
 .about-button {
+	/* background-image: ; */
+	font-family: monospace;
 	padding-block: 0.5rem;
 	border-radius: 0.25rem;
 }
 
 .container-info {
-	font-family: monospace;
-	font-size: 1.125rem;
 	transform: translateX(-300px) rotate(15deg);
-	border-radius: 0.25rem;
 	width: 100%;
 	max-width: 500px;
-	height: 300px;
+	min-height: 18.5rem;
+	max-height: none;
+	line-height: 1.3;
 	background-image: url(../img/info-note.png);
+	border-radius: 0.25rem;
+	font-size: 1.125rem;
+	font-family: monospace;
+
+	/* overflow-y: auto; */
 }
 
 .deck {
+	position: relative;
 	width: 200px;
 	height: 300px;
-	position: relative;
 }
 .deck-cover {
 	display: flex;
@@ -99,22 +120,22 @@ footer {
 }
 .deck-cover-title {
 	padding-block: 1rem;
-	background-color: #4b4c50;
 	opacity: 0.9;
+	background-color: #4b4c50;
 	color: aliceblue;
 }
 .card {
-	width: 100%;
-	height: 100%;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	position: absolute;
 	top: 0;
 	left: 0;
-	border: 1px solid #8b8b8b;
-	background-color: white;
-	border-radius: 8px;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	transition: transform 0.5s ease;
 	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	transition: transform 0.5s ease;
+	background-color: white;
+	border: 1px solid #8b8b8b;
+	border-radius: 8px;
 }
 
 .card-1 img {
@@ -126,20 +147,20 @@ footer {
 }
 
 .card-2 h2 {
+	margin-bottom: 0;
 	font-family: 'oldenburg', serif;
 	color: #e0dfd5;
-	margin-bottom: 0;
 }
 
 .card-3 h2 {
-	font-family: 'Fuzzy Bubbles', sans-serif;
 	margin-bottom: 0;
+	font-family: 'Fuzzy Bubbles', sans-serif;
 }
 
 .card img {
+	object-fit: contain;
 	width: 100%;
 	height: auto;
-	object-fit: contain;
 }
 
 /* Stacking order */
@@ -147,12 +168,12 @@ footer {
 	z-index: 4;
 }
 .card:nth-child(2) {
-	background-color: #9bb3b3;
 	z-index: 3;
+	background-color: #9bb3b3;
 }
 .card:nth-child(3) {
-	background-color: #262d32;
 	z-index: 1;
+	background-color: #262d32;
 }
 
 .card:nth-child(4) {
@@ -162,7 +183,6 @@ footer {
 /* Active State: unfold:  */
 .deck.active .card:nth-child(1) {
 	transform: translateY(300px) rotate(90deg);
-	/* opacity: 0; */
 	transition: 0.8s ease;
 }
 .deck.active .card:nth-child(2) {
@@ -189,78 +209,124 @@ footer {
 }
 
 .card .links {
+	pointer-events: none; /* Links inactive until revealed */
+	display: flex;
+	justify-content: space-around;
+	gap: 0.5rem;
 	position: absolute;
 	bottom: 1rem;
 	left: 0;
 	right: 0;
-	display: flex;
-	justify-content: space-around;
-	text-align: center;
-	gap: 0.5rem;
 	opacity: 0;
 	transform: translateY(1rem);
 	transition: opacity 0.3s ease, transform 0.3s ease;
-	pointer-events: none; /* Links inactive until revealed */
+	text-align: center;
 }
 
 /* Reveal links on hover when deck is active (excluding the deck cover) */
 .deck.active .card:not(.deck-cover):hover .links {
+	pointer-events: auto; /* Now links become clickable */
 	opacity: 1;
 	transform: translateY(0);
-	pointer-events: auto; /* Now links become clickable */
 }
 
 .links a,
 .links button {
-	text-decoration: none;
-	border: 1px solid #ccc;
 	padding: 0.2rem 0.5rem;
+	transition: 0.5s ease;
+	border: 1px solid #ccc;
 	border-radius: 4px;
 	font-size: 0.8rem;
-	transition: 0.5s ease;
+	text-decoration: none;
 }
 
 .link-1 {
-	font-family: 'girassol', serif;
 	background-color: #0a3641;
+	font-family: 'girassol', serif;
 	color: #fbaf00;
 }
 .link-1:hover {
-	background-color: #fbaf00;
-	color: #0a3641;
-	border: 0.5px solid #0a3641;
 	opacity: 0.8;
+	background-color: #fbaf00;
+	border: 0.5px solid #0a3641;
+	color: #0a3641;
 }
 
 .link-2 {
-	font-family: 'oldenburg', serif;
-	background-color: #e0dfd5;
-	color: #262d32;
-	border: 1px solid #b7b8c0;
-	font-family: 'Fuzzy Bubbles', sans-serif;
 	transition: 0.5s;
+	background-color: #e0dfd5;
+	border: 1px solid #b7b8c0;
+	font-family: 'oldenburg', serif;
+	color: #262d32;
 }
 
 .link-2:hover {
-	background-color: #e0e2f0;
 	box-shadow: 0 0 0.5rem #f7f6f2;
 	transition: 0.3s;
+	background-color: #e0e2f0;
 }
 
 .link-3 {
+	transition: 0.4s;
 	background-color: #0b4d41;
 	color: whitesmoke;
-	transition: 0.4s;
 }
 
 .link-3:hover {
-	background-color: white;
-	color: #0b4d41;
 	box-shadow: 2px 2px 2px #13212c;
 	transition: 0.4s ease;
+	background-color: white;
+	color: #0b4d41;
 }
 
 .container-info p {
-	font-size: 1.125rem;
 	padding-left: 1rem;
+	font-size: 1.125rem;
+}
+
+/* MOBILE CSS */
+
+@media (max-width: 900px) {
+}
+.container-about-me {
+	/* display: none; */
+}
+
+/* Mobile layout container */
+.mobile-layout {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 90%;
+	max-width: 400px;
+	margin: 0 auto;
+}
+
+/* Carousel styles */
+.carousel {
+	display: flex;
+	width: 100%;
+	transition: transform 0.5s ease;
+}
+.mobile-card {
+	min-width: 100%;
+}
+.carousel-controls {
+	margin-top: 0.5rem;
+	text-align: center;
+}
+.carousel-controls button {
+	margin: 0 0.5rem;
+	padding: 0.5rem 1rem;
+	cursor: pointer;
+	font-size: 1rem;
+}
+
+/* Slide-out effect for deck cover */
+.deck .deck-cover {
+	transition: transform 0.5s ease;
+}
+.deck .deck-cover.slide-out {
+	transform: translateY(-100%);
 }

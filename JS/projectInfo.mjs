@@ -31,7 +31,7 @@ export function displayProjectInfo() {
 
 			// Use the typewriter effect function to display the text
 			const text = projectsData[projectTitle] || 'No project information available.';
-			typewriterEffect(infoElement, text, 50); // adjust delay as needed
+			typewriterEffect(infoElement, text, 30); // adjust delay as needed
 		});
 	});
 }
