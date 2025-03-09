@@ -1,3 +1,4 @@
+// function to create typewriting effect
 export function typewriterEffect(element, text, delay = 100) {
 	let i = 0;
 	element.textContent = ''; // Clear existing content

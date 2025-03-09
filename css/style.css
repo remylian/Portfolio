@@ -1,6 +1,10 @@
 @import url(./css/partials/reset.css);
 
 header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 	background-image: url(../img/header-bg.png);
 }
 
@@ -26,15 +30,50 @@ main {
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
-
-	margin: 0;
 }
 
+footer {
+	padding-block: 3rem;
+	text-align: center;
+	width: 100%;
+	height: auto;
+	background-image: url(../img/header-bg.png);
+}
 .container-about-me {
-	width: 200px;
+	font-family: monospace;
+	border: 0.5px solid #4b4c50;
+	border-radius: 0.25rem;
+	width: 100%;
+	max-width: 200px;
 	height: 300px;
 	background-color: white;
+	transition: 0.7s;
+	background-image: url(../img/info-note.png);
+	padding-left: 1rem;
 }
+
+.container-about-me.active {
+	transform: translate(20rem, -15rem);
+	transition: 0.7s;
+}
+
+.about img,
+.about button {
+	width: 100%;
+	max-width: 12.5rem;
+	margin-bottom: 1rem;
+}
+
+.about-img {
+	border-radius: 50%;
+	border: 0.5px solid #4b4c50;
+}
+
+.about-button {
+	padding-block: 0.5rem;
+	border-radius: 0.25rem;
+}
+
 .container-info {
 	font-family: monospace;
 	font-size: 1.125rem;
@@ -182,13 +221,11 @@ main {
 }
 
 .link-1 {
-	font-weight: bold;
 	font-family: 'girassol', serif;
 	background-color: #0a3641;
 	color: #fbaf00;
 }
 .link-1:hover {
-	font-weight: bold;
 	background-color: #fbaf00;
 	color: #0a3641;
 	border: 0.5px solid #0a3641;

@@ -1,12 +1,9 @@
 import { typewriterEffect } from './typewriter.mjs';
 
 const projectsData = {
-	Rainydays:
-		'An online shop for outdoor jackets. This was my first project and a course Assignment for my HTML/CSS class at Noroff School of technology and digital media',
-	"Adventurer's Alehouse":
-		"Adventurer's Alehouse is my 1st year project exam. It is a blogg page themed around roleplaying games and showcases what i have learned during my first year at Noroff School of technology and digital media.",
-	'Community Science Museum':
-		'Community Science Museum was a Semester Project for my 1st semester at Noroff School of technology and digital media. It is meant to showcase my understanding of HTML/CSS as well as other relevant skills such as planning and design',
+	Rainydays: 'An online shop for outdoor jackets. This was my first project and a course Assignment for my HTML/CSS class at Noroff',
+	"Adventurer's Alehouse": "Adventurer's Alehouse is my 1st year project exam. It is a blog page themed around roleplaying games",
+	'Community Science Museum': 'Community Science Museum was the Semester Project for my 1st semester at Noroff. Come see our exhibitions',
 };
 
 // The displayProjectInfo function updates the info container based on the button clicked.
