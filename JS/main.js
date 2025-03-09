@@ -30,6 +30,6 @@ aboutBtn.addEventListener('click', () => {
 });
 
 // Conditionally load mobile-specific code if on mobile
-if (window.innerWidth <= 999) {
+if (window.innerWidth <= 900) {
 	import('./mobile.mjs').then(() => {});
 }
