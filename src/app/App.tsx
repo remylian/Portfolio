@@ -14,8 +14,8 @@ export default function App() {
   const placeholder = useMemo<Display>(
     () => ({
       key: "placeholder",
-      title: "Project info",
-      content: 'Click "info" on a project card to read more.',
+      title: "Read All About It!",
+      content: '',
     }),
     []
   );

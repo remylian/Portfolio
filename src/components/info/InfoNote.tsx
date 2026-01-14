@@ -19,12 +19,12 @@ export default function InfoNote({ title, content, onClose }: Props) {
         rounded-md
         border border-zinc-900/20
         bg-cover bg-center
-        p-6
+        p-10
         shadow-lg
       "
     >
       <div className="flex items-start justify-between gap-4">
-        <h2 className="mx-auto text-center text-lg font-semibold text-zinc-900">
+        <h2 className="mx-auto text-center text-xl font-semibold text-zinc-900">
           {title}
         </h2>
 
@@ -50,7 +50,7 @@ export default function InfoNote({ title, content, onClose }: Props) {
         ) : null}
       </div>
 
-      <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-zinc-900">
+      <p className="mt-3 whitespace-pre-line text-base leading-relaxed text-zinc-900">
         {typed}
       </p>
     </aside>

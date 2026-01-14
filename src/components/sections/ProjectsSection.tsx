@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import type { Project } from "../../data/projects";
-import InfoNote from "../info/InfoNote";
-import ProjectDeck from "../projects/ProjectDeck";
 import AboutPanel from "./AboutPanel";
+import ProjectDeck from "../projects/ProjectDeck";
+import InfoNote from "../info/InfoNote";
 
 type Display = {
   key: string;
@@ -13,6 +13,7 @@ type Display = {
 type Props = {
   isAboutOpen: boolean;
   onCloseAbout: () => void;
+
   display: Display;
   onDisplay: (next: { title: string; content: string }) => void;
   onClearDisplay: () => void;
@@ -27,13 +28,12 @@ export default function ProjectsSection({
 }: Props) {
   const noteRef = useRef<HTMLDivElement | null>(null);
 
-  function handleInfo(project: Project) {
+  function handleProjectInfo(project: Project) {
     onDisplay({
       title: project.infoTitle,
       content: project.infoContent,
     });
 
-    // Smooth UX: bring the note into view after selecting a project.
     requestAnimationFrame(() => {
       noteRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
@@ -41,7 +41,7 @@ export default function ProjectsSection({
 
   return (
     <section className="mx-auto w-full max-w-5xl px-4 pb-24">
-      {/* About panel sits directly above the InfoNote */}
+      {/* About panel (above deck) */}
       <div className="pt-6">
         <AboutPanel
           isOpen={isAboutOpen}
@@ -50,19 +50,19 @@ export default function ProjectsSection({
         />
       </div>
 
-      {/* Info note area (the single “display”) */}
-      <div ref={noteRef} className="pt-4">
+      {/* Deck in the middle */}
+      <div className="flex justify-center pt-10">
+        <ProjectDeck onInfo={handleProjectInfo} />
+      </div>
+
+      {/* InfoNote below the deck */}
+      <div ref={noteRef} className="pt-10">
         <InfoNote
-          key={display.key} // keyed remount restarts typewriter
+          key={display.key}
           title={display.title}
           content={display.content}
           onClose={display.key !== "placeholder" ? onClearDisplay : undefined}
         />
-      </div>
-
-      {/* Deck below */}
-      <div className="flex justify-center pt-10">
-        <ProjectDeck onInfo={handleInfo} />
       </div>
     </section>
   );

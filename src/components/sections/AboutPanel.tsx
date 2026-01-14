@@ -7,7 +7,11 @@ type Props = {
 };
 
 const ABOUT_TEXT =
-  "Hello there! My name is Remy Lian, a frontend developer currently completing my first year of studies. I enjoy the problem solving aspect of coding and am constantly seeking to learn and refine my skills.\n\nOutside of the digital world, my family is my greatest inspiration and a source of balance in my life. I practice martial arts, which has instilled in me discipline, focus, and resilience—qualities that I bring to every project.\n\nIn my spare time, I enjoy both tabletop and PC gaming, activities that sharpen my strategic thinking and fuel my creativity. I am excited to merge my technical skills with my personal passions to create engaging and innovative digital experiences.";
+  "I’m a frontend developer based in Trondheim, Norway, currently finishing my studies at Noroff and working on my final project exam.\n\n" +
+  "I enjoy building clean, user-focused interfaces and turning design ideas into reliable, maintainable code. Problem-solving is what keeps me engaged, and I’m always looking to refine how things work — not just how they look.\n\n" +
+  "Outside of development, my family is a major source of balance and motivation in my life. I also practice martial arts, which has taught me discipline, focus, and persistence — qualities I bring into my work as a developer.\n\n" +
+  "I’m actively applying for junior frontend roles where I can contribute to real products, collaborate with a team, and continue growing through hands-on experience.";
+
 
 export default function AboutPanel({ isOpen, onClose, onDisplay }: Props) {
   return (
@@ -18,7 +22,7 @@ export default function AboutPanel({ isOpen, onClose, onDisplay }: Props) {
         transition-all duration-700
         ${
           isOpen
-            ? "translate-y-0 opacity-100"
+            ? "translate-y-0 opacity-100 rotate-360"
             : "-translate-y-3 opacity-0 pointer-events-none"
         }
       `}
@@ -39,8 +43,8 @@ export default function AboutPanel({ isOpen, onClose, onDisplay }: Props) {
             text-[#333436]
           "
         >
-          <div className="flex items-start justify-between gap-3">
-            <h2 className="text-base font-semibold">Who Dis?</h2>
+          <div className="flex items-start justify-center gap-3">
+            <h2 className="text-base font-semibold">Who am I?</h2>
 
             <button
               type="button"
