@@ -26,7 +26,13 @@ export default function ProjectsSection({
   onDisplay,
   onClearDisplay,
 }: Props) {
-  const noteRef = useRef<HTMLDivElement | null>(null);
+  const infoRef = useRef<HTMLDivElement | null>(null);
+
+  function scrollToInfo() {
+    requestAnimationFrame(() => {
+      infoRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
 
   function handleProjectInfo(project: Project) {
     onDisplay({
@@ -34,9 +40,7 @@ export default function ProjectsSection({
       content: project.infoContent,
     });
 
-    requestAnimationFrame(() => {
-      noteRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
+    scrollToInfo();
   }
 
   return (
@@ -47,6 +51,7 @@ export default function ProjectsSection({
           isOpen={isAboutOpen}
           onClose={onCloseAbout}
           onDisplay={onDisplay}
+          onAfterDisplay={scrollToInfo}
         />
       </div>
 
@@ -56,7 +61,7 @@ export default function ProjectsSection({
       </div>
 
       {/* InfoNote below the deck */}
-      <div ref={noteRef} className="pt-10">
+      <div ref={infoRef} className="pt-10 scroll-mt-24">
         <InfoNote
           key={display.key}
           title={display.title}

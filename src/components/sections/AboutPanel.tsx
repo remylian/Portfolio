@@ -4,6 +4,7 @@ type Props = {
   isOpen: boolean;
   onClose: () => void;
   onDisplay: (next: { title: string; content: string }) => void;
+  onAfterDisplay: () => void;
 };
 
 const ABOUT_TEXT =
@@ -12,8 +13,12 @@ const ABOUT_TEXT =
   "Outside of development, my family is a major source of balance and motivation in my life. I also practice martial arts, which has taught me discipline, focus, and persistence — qualities I bring into my work as a developer.\n\n" +
   "I’m actively applying for junior frontend roles where I can contribute to real products, collaborate with a team, and continue growing through hands-on experience.";
 
-
-export default function AboutPanel({ isOpen, onClose, onDisplay }: Props) {
+export default function AboutPanel({
+  isOpen,
+  onClose,
+  onDisplay,
+  onAfterDisplay,
+}: Props) {
   return (
     <div
       aria-hidden={!isOpen}
@@ -22,7 +27,7 @@ export default function AboutPanel({ isOpen, onClose, onDisplay }: Props) {
         transition-all duration-700
         ${
           isOpen
-            ? "translate-y-0 opacity-100 rotate-360"
+            ? "translate-y-0 opacity-100"
             : "-translate-y-3 opacity-0 pointer-events-none"
         }
       `}
@@ -43,8 +48,8 @@ export default function AboutPanel({ isOpen, onClose, onDisplay }: Props) {
             text-[#333436]
           "
         >
-          <div className="flex items-start justify-center gap-3">
-            <h2 className="text-base font-semibold">Who am I?</h2>
+          <div className="flex items-start justify-between gap-3">
+            <h2 className="text-base font-semibold">Who Dis?</h2>
 
             <button
               type="button"
@@ -67,12 +72,13 @@ export default function AboutPanel({ isOpen, onClose, onDisplay }: Props) {
 
           <button
             type="button"
-            onClick={() =>
+            onClick={() => {
               onDisplay({
                 title: "About Me:",
                 content: ABOUT_TEXT,
-              })
-            }
+              });
+              onAfterDisplay();
+            }}
             className="
               mt-3
               w-full
