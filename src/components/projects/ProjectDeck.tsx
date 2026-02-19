@@ -171,7 +171,7 @@ export default function ProjectDeck({ onInfo }: Props) {
                 ${card.bg}
                 ${card.origin}
                 ${stackOffset}
-                ${isActive ? `z-[60] ${ACTIVE_SPOT} ${ACTIVE_SPOT_MOBILE}` : card.z}
+                ${isActive ? `z-[40] ${ACTIVE_SPOT} ${ACTIVE_SPOT_MOBILE}` : card.z}
               `}
             >
               <div className="flex h-full w-full flex-col items-center justify-between p-4">
