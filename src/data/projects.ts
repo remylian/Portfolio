@@ -35,7 +35,7 @@ export const projects: readonly Project[] = [
     logoSrc: "assets/rainydays-logo.svg",
     logoAlt: "Rainydays logo",
 
-    bg: "bg-[#9bb3b3]",
+    bg: "bg-[#0a3641]",
 
     transform: "translate-x-[15px] rotate-[2deg]",
     mobileTransform:
