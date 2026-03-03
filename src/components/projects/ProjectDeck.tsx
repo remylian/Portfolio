@@ -8,26 +8,35 @@ type Props = {
   onInfo: (project: Project) => void;
 };
 
-function getActionClasses(theme: "link-1" | "link-2" | "link-3") {
-  const base =
-    "px-[0.5rem] py-[0.2rem] text-[0.8rem] no-underline border rounded-[4px] transition-[opacity,background-color,color,box-shadow,border] duration-500";
-
-  if (theme === "link-1") {
-    return `${base} bg-[#0a3641] text-[#fbaf00] border-[#ccc] font-['Girassol'] hover:opacity-80 hover:bg-[#fbaf00] hover:text-[#0a3641] hover:border-[#0a3641]`;
-  }
-
-  if (theme === "link-2") {
-    return `${base} bg-[#e0dfd5] text-[#262d32] border-[#b7b8c0] font-['Oldenburg'] hover:shadow-[0_0_0.5rem_#f7f6f2] hover:bg-[#e0e2f0]`;
-  }
-
-  return `${base} bg-[#0b4d41] text-[whitesmoke] border-[#ccc] hover:shadow-[2px_2px_2px_#13212c] hover:bg-white hover:text-[#0b4d41]`;
-}
-
 function getStackOffset(index: number) {
   if (index === 0) return "translate-x-0 translate-y-0";
   if (index === 1) return "translate-x-[3px] translate-y-[3px]";
   return "translate-x-[6px] translate-y-[6px]";
 }
+
+// Page-theme (dark + neon) — same style for all TOC buttons
+function getTocButtonClasses(selected: boolean) {
+  const base =
+    "w-full rounded border px-3 py-2 text-left text-sm transition " +
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70";
+
+  if (selected) {
+    return (
+      base +
+      " border-white/25 bg-white/10 text-white shadow-[0_0_1.0rem_rgba(34,211,238,0.18)]"
+    );
+  }
+
+  return (
+    base +
+    " border-white/12 bg-white/5 text-white/85 hover:bg-white/8 hover:border-white/18"
+  );
+}
+
+/** Page-theme cover styling (fixed; does not change per project) */
+const COVER_TINT = "from-violet-500/22 via-black/15 to-cyan-400/18";
+const COVER_GLOW = "0 0 1.6rem rgba(34,211,238,0.16)";
+const COVER_TEXT = "text-white [text-shadow:0_0_10px_rgba(34,211,238,0.18)]";
 
 export default function ProjectDeck({ onInfo }: Props) {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,49 +75,51 @@ export default function ProjectDeck({ onInfo }: Props) {
       {/* TOC panel */}
       <nav
         aria-hidden={!isOpen}
-        className={`w-[min(520px,92vw)] rounded-md border border-zinc-200/30 bg-[#e0dfd5] p-3 shadow-lg transition-all duration-500 min-[901px]:w-[260px] ${
+        className={`w-[min(520px,92vw)] rounded-md border border-white/12 bg-zinc-950/85 p-3 shadow-lg transition-all duration-500 min-[901px]:w-[260px] ${
           isOpen
             ? "translate-y-0 opacity-100"
             : "pointer-events-none -translate-y-2 opacity-0"
         } `}
+        style={{
+          boxShadow: isOpen ? "0 0 1.6rem rgba(34,211,238,0.16)" : undefined,
+        }}
       >
         <div className="mb-2 flex items-center justify-between gap-3">
-          <h3 className="text-black-100 text-sm font-semibold">
+          <h3 className="text-sm font-semibold text-white">
             Table of Contents
           </h3>
 
           <button
             type="button"
             onClick={closeTOC}
-            className="text-black-100 rounded border border-black/20 bg-black/10 px-2 py-1 text-xs transition hover:bg-black/15"
+            className="rounded border border-white/15 bg-white/8 px-2 py-1 text-xs text-white/80 transition hover:bg-white/12"
           >
             Close ✕
           </button>
         </div>
 
-        <ul className="space-y-2">
-          {ordered.map((p) => {
-            const selected = p.id === activeId;
-            return (
-              <li key={p.id}>
-                <button
-                  type="button"
-                  onClick={() => selectProject(p)}
-                  className={`w-full rounded border px-3 py-2 text-left text-sm transition ${
-                    selected
-                      ? "border-black/50 bg-black/10 text-black"
-                      : "text-black-100 border-black/15 bg-black/5 hover:bg-black/10"
-                  } `}
-                >
-                  {p.title}
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+        {/* Fixed height area that scrolls internally + thin scrollbar */}
+        <div className="thin-scroll h-[210px] overflow-auto pr-1">
+          <ul className="space-y-2">
+            {ordered.map((p) => {
+              const selected = p.id === activeId;
+              return (
+                <li key={p.id}>
+                  <button
+                    type="button"
+                    onClick={() => selectProject(p)}
+                    className={getTocButtonClasses(selected)}
+                  >
+                    {p.title}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
 
         <div className="mt-3 flex items-center justify-between">
-          <p className="text-black-200/70 text-xs">
+          <p className="text-xs text-white/60">
             {activeId
               ? "Selected project is shown on the deck."
               : "Pick a project to open it."}
@@ -117,7 +128,7 @@ export default function ProjectDeck({ onInfo }: Props) {
           <button
             type="button"
             onClick={() => setActiveId(null)}
-            className="text-black-100 rounded border border-black/15 bg-black/5 px-2 py-1 text-xs hover:bg-black/10"
+            className="rounded border border-white/12 bg-white/6 px-2 py-1 text-xs text-white/75 transition hover:bg-white/10"
           >
             Clear
           </button>
@@ -133,24 +144,25 @@ export default function ProjectDeck({ onInfo }: Props) {
           return (
             <div
               key={card.id}
-              className={`absolute inset-0 rounded-lg border shadow-md transition-transform duration-500 ${card.bg} ${card.origin} ${stackOffset} ${isActive ? `z-[40] ${ACTIVE_SPOT} ${ACTIVE_SPOT_MOBILE}` : card.z} `}
+              className={`absolute inset-0 rounded-lg border border-white/12 shadow-md transition-transform duration-500 ${card.bg} ${card.origin} ${stackOffset} ${
+                isActive
+                  ? // IMPORTANT: active must be on top (mobile only), but non-active cards must maintain their original stacking order (desktop + mobile) to preserve the layered “stack” look
+                    `z-[40] max-[900px]:z-[60] ${ACTIVE_SPOT} ${ACTIVE_SPOT_MOBILE} shadow-[0_0_1.6rem_rgba(34,211,238,0.22)]`
+                  : card.z
+              } `}
             >
-              <div className="flex h-full w-full flex-col items-center justify-between p-4">
+              <div className="relative flex h-full w-full flex-col items-center justify-between p-4">
                 {/* Clickable “article link” area */}
                 <Link
                   to={getProjectPath(card.id)}
-                  className="w-full rounded outline-none focus-visible:ring-2 focus-visible:ring-black/40"
+                  className="w-full rounded outline-none focus-visible:ring-2 focus-visible:ring-white/35"
                   aria-label={`Open article page for ${card.title}`}
                 >
-                  <h3
-                    className={`text-center text-[11px] font-semibold tracking-wide ${card.bg.includes("#0a3641") ? "text-zinc-100" : "text-zinc-800"} `}
-                  >
+                  <h3 className="text-center text-[11px] font-semibold tracking-wide text-white">
                     {card.title}
                   </h3>
 
-                  <p
-                    className={`mt-1 line-clamp-3 text-center text-[10px] leading-snug ${card.bg.includes("#0a3641") ? "text-zinc-200" : "text-zinc-700"} `}
-                  >
+                  <p className="mt-1 line-clamp-3 text-center text-[10px] leading-snug text-white/70">
                     {card.shortDescription}
                   </p>
 
@@ -171,7 +183,10 @@ export default function ProjectDeck({ onInfo }: Props) {
                       href={card.repoUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className={getActionClasses(card.theme)}
+                      className="rounded border border-white/15 bg-white/8 px-3 py-1 text-xs text-white/90 transition hover:border-white/25 hover:bg-white/14 focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:outline-none"
+                      style={{
+                        boxShadow: "0 0 0.6rem rgba(34, 211, 238, 0.18)",
+                      }}
                     >
                       repo
                     </a>
@@ -180,7 +195,10 @@ export default function ProjectDeck({ onInfo }: Props) {
                       href={card.liveUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className={getActionClasses(card.theme)}
+                      className="rounded border border-white/15 bg-white/8 px-3 py-1 text-xs text-white/90 transition hover:border-white/25 hover:bg-white/14 focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:outline-none"
+                      style={{
+                        boxShadow: "0 0 0.6rem rgba(124, 58, 237, 0.18)",
+                      }}
                     >
                       live
                     </a>
@@ -193,7 +211,7 @@ export default function ProjectDeck({ onInfo }: Props) {
           );
         })}
 
-        {/* Cover toggle */}
+        {/* Cover toggle (consistent page-theme tint/glow/text) */}
         <button
           type="button"
           onClick={() => {
@@ -204,16 +222,31 @@ export default function ProjectDeck({ onInfo }: Props) {
           aria-label="Toggle project table of contents"
           style={{
             backgroundImage: `url(${withBase("assets/book-cover.png")})`,
+            boxShadow: COVER_GLOW,
           }}
-          className={`absolute inset-0 z-50 rounded-lg bg-cover bg-center shadow-lg transition-[opacity,filter] duration-300 ${
+          className={`group absolute inset-0 rounded-lg bg-cover bg-center shadow-lg transition-[opacity,filter,box-shadow] duration-300 ${
             isOpen
-              ? `opacity-80 max-[900px]:pointer-events-none max-[900px]:opacity-30 min-[901px]:opacity-95`
-              : "opacity-100"
-          } `}
+              ? // MOBILE: cover goes behind active card
+                "opacity-80 max-[900px]:pointer-events-none max-[900px]:z-0 max-[900px]:opacity-25 min-[901px]:z-50 min-[901px]:opacity-95"
+              : "z-50 opacity-100"
+          } hover:brightness-110`}
         >
-          <div className="flex h-full w-full items-center justify-center">
-            <h2 className="bg-zinc-700/80 px-3 py-2 text-sm font-semibold text-white">
-              {isOpen ? "Table of Contents" : "My Projects"}
+          {/* fixed page-theme tint */}
+          <div
+            className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${COVER_TINT}`}
+          />
+
+          {/* slight hover glow */}
+          <div
+            className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            style={{ boxShadow: COVER_GLOW }}
+          />
+
+          <div className="relative flex h-full w-full items-center justify-center">
+            <h2
+              className={`rounded px-3 py-2 text-sm font-semibold ${COVER_TEXT}`}
+            >
+              {isOpen ? "Choose a project" : "My Projects"}
             </h2>
           </div>
         </button>

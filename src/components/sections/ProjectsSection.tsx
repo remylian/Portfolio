@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import type { Project } from "../../data/projects";
-import AboutPanel from "./AboutPanel";
 import ProjectDeck from "../projects/ProjectDeck";
 import InfoNote from "../info/InfoNote";
 
@@ -11,28 +10,29 @@ type Display = {
 };
 
 type Props = {
-  isAboutOpen: boolean;
-  onCloseAbout: () => void;
-
   display: Display;
   onDisplay: (next: { title: string; content: string }) => void;
   onClearDisplay: () => void;
 };
 
 export default function ProjectsSection({
-  isAboutOpen,
-  onCloseAbout,
   display,
   onDisplay,
   onClearDisplay,
 }: Props) {
   const infoRef = useRef<HTMLDivElement | null>(null);
 
-  function scrollToInfo() {
-    requestAnimationFrame(() => {
-      infoRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  }
+  // function scrollToInfoIfNeeded() {
+  //   const el = infoRef.current;
+  //   if (!el) return;
+
+  //   const rect = el.getBoundingClientRect();
+  //   const isFullyVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+
+  //   if (!isFullyVisible) {
+  //     el.scrollIntoView({ behavior: "smooth", block: "start" });
+  //   }
+  // }
 
   function handleProjectInfo(project: Project) {
     onDisplay({
@@ -40,34 +40,28 @@ export default function ProjectsSection({
       content: project.infoContent,
     });
 
-    scrollToInfo();
+    // scrollToInfoIfNeeded();
   }
 
   return (
-    <section className="mx-auto w-full max-w-5xl px-4 pb-24">
-      {/* About panel (above deck) */}
-      <div className="pt-6">
-        <AboutPanel
-          isOpen={isAboutOpen}
-          onClose={onCloseAbout}
-          onDisplay={onDisplay}
-          onAfterDisplay={scrollToInfo}
-        />
-      </div>
+    <section className="container-page pb-24">
+      <div className="flex flex-col items-center">
+        <div className="pt-6">
+          <ProjectDeck onInfo={handleProjectInfo} />
+        </div>
 
-      {/* Deck in the middle */}
-      <div className="flex justify-center pt-10">
-        <ProjectDeck onInfo={handleProjectInfo} />
-      </div>
-
-      {/* InfoNote below the deck */}
-      <div ref={infoRef} className="pt-10 scroll-mt-24">
-        <InfoNote
-          key={display.key}
-          title={display.title}
-          content={display.content}
-          onClose={display.key !== "placeholder" ? onClearDisplay : undefined}
-        />
+        <div ref={infoRef} className="w-full scroll-mt-24 pt-10">
+          <div className="flex justify-center">
+            <InfoNote
+              key={display.key}
+              title={display.title}
+              content={display.content}
+              onClose={
+                display.key !== "placeholder" ? onClearDisplay : undefined
+              }
+            />
+          </div>
+        </div>
       </div>
     </section>
   );

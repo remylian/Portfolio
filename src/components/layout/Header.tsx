@@ -1,35 +1,52 @@
-import { withBase } from "../../lib/paths";
+import { Link, NavLink } from "react-router-dom";
+// import { withBase } from "../../lib/paths";
 
-type Props = {
-  onAboutClick?: () => void;
-};
+function navLinkClass({ isActive }: { isActive: boolean }) {
+  return [
+    "rounded-md px-3 py-2 text-sm transition",
+    "hover:bg-white/5 hover:text-white",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70",
+    isActive ? "bg-white/8 text-white" : "text-white/75",
+  ].join(" ");
+}
 
-export default function Header({ onAboutClick }: Props) {
+export default function Header() {
   return (
-    <header
-      style={{ backgroundImage: `url(${withBase("assets/header-bg.png")})` }}
-      className="z-50-w-full sticky top-0 flex flex-col items-center justify-center bg-cover bg-center text-center"
-    >
-      <h1 className="py-8 [font-family:'Diplomata',serif] text-[2.5rem] text-[#333436]">
-        The Daily Portfolio!
-      </h1>
+    <header className="sticky top-0 z-[100] border-b border-white/10 bg-black/25 backdrop-blur">
+      <div className="container-page flex items-center justify-between py-3">
+        <Link to="/" className="group flex items-center gap-3">
+          <div className="leading-tight">
+            <div className="text-sm font-semibold tracking-wide text-white">
+              Remy Lian
+            </div>
+            <div className="text-xs text-white/65">Front-End Developer</div>
+          </div>
+        </Link>
 
-      <section className="pb-6">
-        <img
-          src={withBase("assets/profile.jpg")}
-          alt="Portrait of Remy Lian"
-          className="mx-auto mb-4 h-[12.5rem] w-[12.5rem] rounded-full border border-[#4b4c50] object-cover"
-          draggable={false}
-        />
+        <nav className="hidden items-center gap-1 md:flex">
+          <NavLink to="/" className={navLinkClass} end>
+            Home
+          </NavLink>
 
-        <button
-          type="button"
-          onClick={onAboutClick}
-          className="mx-auto mb-4 w-full max-w-[12.5rem] rounded border border-[#4b4c50] bg-white/70 py-2 [font-family:monospace] text-[#333436] shadow-sm transition hover:bg-white/90"
-        >
-          About me!
-        </button>
-      </section>
+          {/* About opens the hero swap via hash bridge */}
+          <Link
+            to="/#about"
+            className="rounded-md px-3 py-2 text-sm text-white/75 transition hover:bg-white/5 hover:text-white focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:outline-none"
+          >
+            About
+          </Link>
+        </nav>
+
+        <div className="flex items-center gap-2">
+          <a
+            href="#contact"
+            className="rounded-lg border border-white/12 bg-white/5 px-3 py-2 text-sm text-white/85 transition hover:border-white/20 hover:bg-white/8"
+            style={{ boxShadow: "var(--glow)" }}
+          >
+            Contact
+          </a>
+        </div>
+      </div>
     </header>
   );
 }

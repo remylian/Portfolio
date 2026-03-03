@@ -26,24 +26,24 @@ export default function ProjectCard({
   onEnter,
   onLeave,
 }: Props) {
+  const activeGlow = "0 0 1.6rem rgba(34, 211, 238, 0.22)";
+  const hoverGlow = "0 0 1.0rem rgba(255, 255, 255, 0.10)";
+
   return (
     <article
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
-      className={`
-        absolute inset-0
-        rounded-lg
-        bg-[url('/Portfolio/assets/book-cover.png')]
-        shadow-lg
-        transition-transform
-        ${isOpen ? "duration-500" : "duration-700"}
-        ${origin}
-        ${isOpen ? baseTransform : ""}
-        ${isOpen && isHovered ? "-translate-y-6 scale-[1.02] z-50" : baseZ}
-      `}
+      className={`absolute inset-0 rounded-lg border border-white/12 bg-zinc-950/55 shadow-lg transition-transform ${
+        isOpen ? "duration-500" : "duration-700"
+      } ${origin} ${isOpen ? baseTransform : ""} ${
+        isOpen && isHovered ? "z-50 -translate-y-6 scale-[1.02]" : baseZ
+      } `}
+      style={{
+        boxShadow: isOpen ? activeGlow : isHovered ? hoverGlow : undefined,
+      }}
     >
       <div className="flex h-full flex-col items-center justify-between p-4">
-        <h3 className="text-center text-sm font-semibold text-zinc-100">
+        <h3 className="text-center text-sm font-semibold text-white">
           {project.title}
         </h3>
 
@@ -53,6 +53,7 @@ export default function ProjectCard({
             alt={`${project.title} logo`}
             className="max-h-24 w-auto object-contain"
             loading="lazy"
+            draggable={false}
           />
         </div>
 
@@ -62,7 +63,7 @@ export default function ProjectCard({
               href={project.repoUrl}
               target="_blank"
               rel="noreferrer"
-              className="rounded border border-zinc-300/70 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-100 hover:bg-zinc-900/70"
+              className="rounded border border-white/15 bg-white/8 px-3 py-1 text-xs text-white/85 transition hover:bg-white/12"
             >
               Repo
             </a>
@@ -70,7 +71,7 @@ export default function ProjectCard({
               href={project.liveUrl}
               target="_blank"
               rel="noreferrer"
-              className="rounded border border-zinc-300/70 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-100 hover:bg-zinc-900/70"
+              className="rounded border border-white/15 bg-white/8 px-3 py-1 text-xs text-white/85 transition hover:bg-white/12"
             >
               Live
             </a>

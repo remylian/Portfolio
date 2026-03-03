@@ -31,6 +31,12 @@ export type Project = {
   infoContent: string;
 };
 
+// ✅ Uniform dark-neon background for ALL deck cards
+// Keeps everything cohesive in Option B, while you still get per-project theme
+// via buttons, accents, TOC, cover tint, etc.
+const DECK_CARD_BG =
+  "bg-[#0b1020] bg-gradient-to-br from-violet-500/20 via-transparent to-cyan-400/15";
+
 export const projects: readonly Project[] = [
   {
     id: 1,
@@ -48,7 +54,7 @@ export const projects: readonly Project[] = [
     logoSrc: "/assets/rainydays-logo.svg",
     logoAlt: "Rainydays logo",
 
-    bg: "bg-[#0a3641]",
+    bg: DECK_CARD_BG,
 
     transform: "translate-x-[15px] rotate-[2deg]",
     mobileTransform:
@@ -80,7 +86,7 @@ export const projects: readonly Project[] = [
     logoSrc: "/assets/logo.svg",
     logoAlt: "Adventurer’s Alehouse logo",
 
-    bg: "bg-[#e0dfd5]",
+    bg: DECK_CARD_BG,
 
     transform: "translate-x-[-140px] -rotate-[55deg]",
     mobileTransform:
@@ -112,7 +118,7 @@ export const projects: readonly Project[] = [
     logoSrc: "/assets/logo-final.svg",
     logoAlt: "Community Science Museum logo",
 
-    bg: "bg-white",
+    bg: DECK_CARD_BG,
 
     transform: "translate-x-[250px] rotate-[15deg]",
     mobileTransform:
@@ -147,7 +153,7 @@ export const projects: readonly Project[] = [
     logoSrc: "/assets/Webshop-logo.png",
     logoAlt: "React Webshop logo",
 
-    bg: "bg-white",
+    bg: DECK_CARD_BG,
 
     transform: "translate-x-[0px] rotate-[0deg]",
     mobileTransform:
@@ -183,7 +189,7 @@ export const projects: readonly Project[] = [
     logoSrc: "/assets/logo-auction.png",
     logoAlt: "Auction House logo",
 
-    bg: "bg-white",
+    bg: DECK_CARD_BG,
 
     transform: "translate-x-[0px] rotate-[0deg]",
     mobileTransform:
