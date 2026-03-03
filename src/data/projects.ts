@@ -22,6 +22,11 @@ export type Project = {
   repoUrl: string;
   liveUrl: string;
 
+  shortDescription: string; // max 130 chars
+  imageSrc: string; // /assets/xxx.webp (or png/jpg)
+  imageAlt: string;
+  imageCaption: string;
+
   infoTitle: string;
   infoContent: string;
 };
@@ -32,7 +37,15 @@ export const projects: readonly Project[] = [
     title: "Rainydays",
     theme: "link-1",
 
-    logoSrc: "assets/rainydays-logo.svg",
+    shortDescription:
+      "A responsive storefront UI with clean layout and styling (placeholder).",
+
+    imageSrc: "/assets/rainydays-logo.svg",
+    imageAlt: "Rainy Days project image",
+    imageCaption:
+      "Rainy Days — placeholder caption (replace with a real screenshot caption).",
+
+    logoSrc: "/assets/rainydays-logo.svg",
     logoAlt: "Rainydays logo",
 
     bg: "bg-[#0a3641]",
@@ -56,7 +69,15 @@ export const projects: readonly Project[] = [
     title: "Adventurer’s Alehouse",
     theme: "link-2",
 
-    logoSrc: "assets/logo.svg",
+    shortDescription:
+      "A D&D-inspired tavern concept site blending fantasy theming with modern frontend architecture.",
+
+    imageSrc: "/assets/alehouse-hero.png", // replace with real screenshot
+    imageAlt: "Adventurer's Alehouse homepage hero section",
+    imageCaption:
+      "Adventurer’s Alehouse — fantasy tavern concept site with immersive theming.",
+
+    logoSrc: "/assets/logo.svg",
     logoAlt: "Adventurer’s Alehouse logo",
 
     bg: "bg-[#e0dfd5]",
@@ -80,7 +101,15 @@ export const projects: readonly Project[] = [
     title: "Community Science Museum",
     theme: "link-3",
 
-    logoSrc: "assets/logo-final.svg",
+    shortDescription:
+      "A responsive community museum site focused on accessibility, structure, and clear content hierarchy.",
+
+    imageSrc: "/assets/community-museum-hero.png", // replace with real screenshot
+    imageAlt: "Community Museum homepage showcasing exhibitions",
+    imageCaption:
+      "Community Museum — responsive layout built with accessibility in focus.",
+
+    logoSrc: "/assets/logo-final.svg",
     logoAlt: "Community Science Museum logo",
 
     bg: "bg-white",
@@ -106,8 +135,16 @@ export const projects: readonly Project[] = [
     title: "React Webshop",
     theme: "link-2",
 
+    shortDescription:
+      "A webshop project showcasing product browsing and UI polish (placeholder).",
+
+    imageSrc: "/assets/Webshop-logo.png",
+    imageAlt: "Webshop project image",
+    imageCaption:
+      "Webshop — placeholder caption (replace with real screenshot caption).",
+
     // TODO: add this file to /public/assets/ and update name if needed
-    logoSrc: "assets/Webshop-logo.png",
+    logoSrc: "/assets/Webshop-logo.png",
     logoAlt: "React Webshop logo",
 
     bg: "bg-white",
@@ -134,8 +171,16 @@ export const projects: readonly Project[] = [
     title: "Auction House",
     theme: "link-2",
 
+    shortDescription:
+      "An auction platform project with listings and bidding flow (placeholder).",
+
+    imageSrc: "/assets/logo-auction.png",
+    imageAlt: "Auction House project image",
+    imageCaption:
+      "Auction House — placeholder caption (replace with real screenshot caption).",
+
     // TODO: add this file to /public/assets/ and update name if needed
-    logoSrc: "assets/logo-auction.png",
+    logoSrc: "/assets/logo-auction.png",
     logoAlt: "Auction House logo",
 
     bg: "bg-white",

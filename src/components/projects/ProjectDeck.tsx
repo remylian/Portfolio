@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react";
-import { withBase } from "../../lib/paths";
+import { Link } from "react-router-dom";
+
+import { withBase, getProjectPath } from "../../lib/paths";
 import { projects, type Project } from "../../data/projects";
 
 type Props = {
@@ -33,7 +35,6 @@ export default function ProjectDeck({ onInfo }: Props) {
 
   const ordered = useMemo(() => projects, []);
 
-  // One consistent "fan-out spot" for every active card
   const ACTIVE_SPOT = "translate-x-[240px] translate-y-0 rotate-[10deg]";
   const ACTIVE_SPOT_MOBILE =
     "max-[900px]:translate-x-0 max-[900px]:-translate-y-[18px] max-[900px]:rotate-0 max-[900px]:scale-[1.03]";
@@ -61,52 +62,25 @@ export default function ProjectDeck({ onInfo }: Props) {
   }
 
   return (
-    <section
-  className="
-    flex
-    flex-col-reverse
-    items-center
-    gap-6
-
-    min-[901px]:flex-row
-    min-[901px]:items-start
-  "
->
+    <section className="flex flex-col-reverse items-center gap-6 min-[901px]:flex-row min-[901px]:items-start">
       {/* TOC panel */}
       <nav
         aria-hidden={!isOpen}
-        className={`
-          w-[min(520px,92vw)] min-[901px]:w-[260px]
-          rounded-md border border-zinc-200/30
-          bg-[#e0dfd5]
-          p-3
-          shadow-lg
-          transition-all duration-500
-          ${
-            isOpen
-              ? "opacity-100 translate-y-0"
-              : "pointer-events-none opacity-0 -translate-y-2"
-          }
-        `}
+        className={`w-[min(520px,92vw)] rounded-md border border-zinc-200/30 bg-[#e0dfd5] p-3 shadow-lg transition-all duration-500 min-[901px]:w-[260px] ${
+          isOpen
+            ? "translate-y-0 opacity-100"
+            : "pointer-events-none -translate-y-2 opacity-0"
+        } `}
       >
         <div className="mb-2 flex items-center justify-between gap-3">
-          <h3 className="text-sm font-semibold text-black-100">
+          <h3 className="text-black-100 text-sm font-semibold">
             Table of Contents
           </h3>
 
-          {/* UX-friendly close button (primary on mobile) */}
           <button
             type="button"
             onClick={closeTOC}
-            className="
-              rounded
-              border border-black/20
-              bg-black/10
-              px-2 py-1
-              text-xs text-black-100
-              transition
-              hover:bg-black/15
-            "
+            className="text-black-100 rounded border border-black/20 bg-black/10 px-2 py-1 text-xs transition hover:bg-black/15"
           >
             Close ✕
           </button>
@@ -120,17 +94,11 @@ export default function ProjectDeck({ onInfo }: Props) {
                 <button
                   type="button"
                   onClick={() => selectProject(p)}
-                  className={`
-                    w-full rounded
-                    border px-3 py-2
-                    text-left text-sm
-                    transition
-                    ${
-                      selected
-                        ? "border-black/50 bg-black/10 text-black"
-                        : "border-black/15 bg-black/5 text-black-100 hover:bg-black/10"
-                    }
-                  `}
+                  className={`w-full rounded border px-3 py-2 text-left text-sm transition ${
+                    selected
+                      ? "border-black/50 bg-black/10 text-black"
+                      : "text-black-100 border-black/15 bg-black/5 hover:bg-black/10"
+                  } `}
                 >
                   {p.title}
                 </button>
@@ -140,14 +108,16 @@ export default function ProjectDeck({ onInfo }: Props) {
         </ul>
 
         <div className="mt-3 flex items-center justify-between">
-          <p className="text-xs text-black-200/70">
-            {activeId ? "Selected project is shown on the deck." : "Pick a project to open it."}
+          <p className="text-black-200/70 text-xs">
+            {activeId
+              ? "Selected project is shown on the deck."
+              : "Pick a project to open it."}
           </p>
 
           <button
             type="button"
             onClick={() => setActiveId(null)}
-            className="rounded border border-black/15 bg-black/5 px-2 py-1 text-xs text-black-100 hover:bg-black/10"
+            className="text-black-100 rounded border border-black/15 bg-black/5 px-2 py-1 text-xs hover:bg-black/10"
           >
             Clear
           </button>
@@ -156,7 +126,6 @@ export default function ProjectDeck({ onInfo }: Props) {
 
       {/* Deck visual */}
       <div className="relative h-[300px] w-[200px] shrink-0 overflow-visible">
-        {/* Cards */}
         {ordered.map((card, index) => {
           const isActive = isOpen && activeId === card.id;
           const stackOffset = getStackOffset(index);
@@ -164,35 +133,37 @@ export default function ProjectDeck({ onInfo }: Props) {
           return (
             <div
               key={card.id}
-              className={`
-                absolute inset-0
-                rounded-lg border shadow-md
-                transition-transform duration-500
-                ${card.bg}
-                ${card.origin}
-                ${stackOffset}
-                ${isActive ? `z-[40] ${ACTIVE_SPOT} ${ACTIVE_SPOT_MOBILE}` : card.z}
-              `}
+              className={`absolute inset-0 rounded-lg border shadow-md transition-transform duration-500 ${card.bg} ${card.origin} ${stackOffset} ${isActive ? `z-[40] ${ACTIVE_SPOT} ${ACTIVE_SPOT_MOBILE}` : card.z} `}
             >
               <div className="flex h-full w-full flex-col items-center justify-between p-4">
-                <h3
-                  className={`
-                    text-center text-[11px] font-semibold tracking-wide
-                    ${card.bg.includes("#0a3641") ? "text-zinc-100" : "text-zinc-800"}
-                  `}
+                {/* Clickable “article link” area */}
+                <Link
+                  to={getProjectPath(card.id)}
+                  className="w-full rounded outline-none focus-visible:ring-2 focus-visible:ring-black/40"
+                  aria-label={`Open article page for ${card.title}`}
                 >
-                  {card.title}
-                </h3>
+                  <h3
+                    className={`text-center text-[11px] font-semibold tracking-wide ${card.bg.includes("#0a3641") ? "text-zinc-100" : "text-zinc-800"} `}
+                  >
+                    {card.title}
+                  </h3>
 
-                <div className="flex flex-1 items-center justify-center">
-                  <img
-                    src={withBase(card.logoSrc)}
-                    alt={card.logoAlt}
-                    className="max-h-24 w-auto object-contain"
-                    loading="lazy"
-                    draggable={false}
-                  />
-                </div>
+                  <p
+                    className={`mt-1 line-clamp-3 text-center text-[10px] leading-snug ${card.bg.includes("#0a3641") ? "text-zinc-200" : "text-zinc-700"} `}
+                  >
+                    {card.shortDescription}
+                  </p>
+
+                  <div className="mt-2 flex flex-1 items-center justify-center">
+                    <img
+                      src={withBase(card.logoSrc)}
+                      alt={card.logoAlt}
+                      className="max-h-24 w-auto object-contain"
+                      loading="lazy"
+                      draggable={false}
+                    />
+                  </div>
+                </Link>
 
                 {isActive ? (
                   <div className="flex gap-2 pb-1">
@@ -226,37 +197,19 @@ export default function ProjectDeck({ onInfo }: Props) {
         <button
           type="button"
           onClick={() => {
-            // On desktop, clicking cover toggles TOC (nice).
-            // On mobile, opening TOC is still fine; closing is handled by the TOC close button.
-            if (isOpen) {
-              toggleCover();
-            } else {
-              openTOC();
-            }
+            if (isOpen) toggleCover();
+            else openTOC();
           }}
           aria-expanded={isOpen}
           aria-label="Toggle project table of contents"
-          style={{ backgroundImage: `url(${withBase("assets/book-cover.png")})` }}
-          className={`
-            absolute inset-0
-            rounded-lg
-            bg-cover bg-center
-            shadow-lg
-            transition-[opacity,filter] duration-300
-
-            z-50
-
-            ${
-              isOpen
-                ? `
-                  opacity-80
-                  min-[901px]:opacity-95
-                  max-[900px]:opacity-30
-                  max-[900px]:pointer-events-none
-                `
-                : "opacity-100"
-            }
-          `}
+          style={{
+            backgroundImage: `url(${withBase("assets/book-cover.png")})`,
+          }}
+          className={`absolute inset-0 z-50 rounded-lg bg-cover bg-center shadow-lg transition-[opacity,filter] duration-300 ${
+            isOpen
+              ? `opacity-80 max-[900px]:pointer-events-none max-[900px]:opacity-30 min-[901px]:opacity-95`
+              : "opacity-100"
+          } `}
         >
           <div className="flex h-full w-full items-center justify-center">
             <h2 className="bg-zinc-700/80 px-3 py-2 text-sm font-semibold text-white">
