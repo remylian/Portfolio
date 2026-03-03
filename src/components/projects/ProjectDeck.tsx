@@ -33,7 +33,7 @@ function getTocButtonClasses(selected: boolean) {
   );
 }
 
-/** Page-theme cover styling (fixed; does not change per project) */
+/** Page-theme cover styling */
 const COVER_TINT = "from-violet-500/22 via-black/15 to-cyan-400/18";
 const COVER_GLOW = "0 0 1.6rem rgba(34,211,238,0.16)";
 const COVER_TEXT = "text-white [text-shadow:0_0_10px_rgba(34,211,238,0.18)]";

@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Dark-first theme tokens (Option B) */
+/* Dark-first theme tokens */
 :root {
   color-scheme: dark;
 
@@ -87,6 +87,46 @@
     background: var(--surface-2);
     border: 1px solid var(--border);
     backdrop-filter: blur(12px);
+  }
+
+  /* Neon-themed card helper */
+  .neon-card {
+    @apply relative overflow-hidden rounded-2xl transition;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  .neon-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 200ms ease;
+    background:
+      radial-gradient(
+        800px 300px at 20% 0%,
+        rgba(34, 211, 238, 0.12),
+        transparent 60%
+      ),
+      radial-gradient(
+        700px 280px at 90% 20%,
+        rgba(124, 58, 237, 0.1),
+        transparent 55%
+      );
+  }
+
+  .neon-card:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.1),
+      var(--glow-2);
+  }
+
+  .neon-card:hover::before {
+    opacity: 1;
   }
 
   /* Thin scrollbar (apply class "thin-scroll" to scroll containers) */

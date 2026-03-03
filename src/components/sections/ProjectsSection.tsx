@@ -22,36 +22,23 @@ export default function ProjectsSection({
 }: Props) {
   const infoRef = useRef<HTMLDivElement | null>(null);
 
-  // function scrollToInfoIfNeeded() {
-  //   const el = infoRef.current;
-  //   if (!el) return;
-
-  //   const rect = el.getBoundingClientRect();
-  //   const isFullyVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
-
-  //   if (!isFullyVisible) {
-  //     el.scrollIntoView({ behavior: "smooth", block: "start" });
-  //   }
-  // }
-
   function handleProjectInfo(project: Project) {
     onDisplay({
-      title: project.infoTitle,
-      content: project.infoContent,
+      title: project.title,
+      content: project.shortDescription,
     });
-
-    // scrollToInfoIfNeeded();
   }
 
   return (
     <section className="container-page pb-24">
-      <div className="flex flex-col items-center">
+      {/* left aligned stack */}
+      <div className="flex flex-col items-start">
         <div className="pt-6">
           <ProjectDeck onInfo={handleProjectInfo} />
         </div>
 
         <div ref={infoRef} className="w-full scroll-mt-24 pt-10">
-          <div className="flex justify-center">
+          <div className="flex justify-start">
             <InfoNote
               key={display.key}
               title={display.title}

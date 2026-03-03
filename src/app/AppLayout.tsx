@@ -8,12 +8,9 @@ export default function AppLayout() {
   const location = useLocation();
 
   // Small UX polish: route change resets scroll
-  // If we're navigating to a hash on the same page (e.g. /#about),
-  // let the target page handle scrolling smoothly.
   useEffect(() => {
-    if (location.hash) return;
     window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
-  }, [location.pathname, location.hash]);
+  }, [location.pathname]);
 
   return (
     <div className="flex min-h-dvh flex-col">

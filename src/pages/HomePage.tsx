@@ -14,7 +14,7 @@ const DEFAULT_DISPLAY: Display = {
   key: "default",
   title: "Welcome",
   content:
-    "Pick a project from the deck to see what it is, what I built, and why it matters.\n\nTip: open the table of contents to jump fast.",
+    "Pick a project from the deck to see a quick preview, then open the full article page.",
 };
 
 const ABOUT_TEXT =
@@ -30,8 +30,12 @@ export default function HomePage() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Derived state (no effect, no lint warning)
-  const isAboutHero = location.hash === "#about";
+  const heroMode: "default" | "about" | "contact" =
+    location.hash === "#about"
+      ? "about"
+      : location.hash === "#contact"
+        ? "contact"
+        : "default";
 
   const [display, setDisplay] = useState<Display>(DEFAULT_DISPLAY);
 
@@ -61,7 +65,7 @@ export default function HomePage() {
               HERO_DUR,
               HERO_EASE,
               "will-change-transform",
-              isAboutHero
+              heroMode !== "default"
                 ? "pointer-events-none absolute inset-0 -translate-y-6 scale-[0.985] opacity-0 blur-[1px]"
                 : "blur-0 relative translate-y-0 scale-100 opacity-100",
             ].join(" ")}
@@ -73,17 +77,25 @@ export default function HomePage() {
 
             <p className="mt-4 max-w-prose text-base leading-relaxed text-white/70">
               This is my course portfolio — designed to feel modern, sharp, and
-              a bit neon. The project deck is the centerpiece: open it and
-              explore.
+              a bit neon.
             </p>
 
-            <div className="mt-6">
+            <div className="mt-6 flex gap-2">
               <button
                 type="button"
                 onClick={() => navigate("/#about")}
                 className="rounded-lg border border-white/12 bg-white/5 px-4 py-2 text-sm text-white/85 transition hover:border-white/20 hover:bg-white/8 focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:outline-none"
               >
                 About me
+              </button>
+
+              <button
+                type="button"
+                onClick={() => navigate("/#contact")}
+                className="rounded-lg border border-white/12 bg-white/5 px-4 py-2 text-sm text-white/85 transition hover:border-white/20 hover:bg-white/8 focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:outline-none"
+                style={{ boxShadow: "var(--glow)" }}
+              >
+                Contact
               </button>
             </div>
           </div>
@@ -95,7 +107,7 @@ export default function HomePage() {
               HERO_DUR,
               HERO_EASE,
               "will-change-transform",
-              isAboutHero
+              heroMode === "about"
                 ? "blur-0 relative translate-y-0 scale-100 opacity-100"
                 : "pointer-events-none absolute inset-0 translate-y-6 scale-[0.985] opacity-0 blur-[1px]",
             ].join(" ")}
@@ -134,18 +146,98 @@ export default function HomePage() {
               </div>
             </div>
           </div>
+
+          {/* Contact Hero */}
+          <div
+            className={[
+              "transition-all",
+              HERO_DUR,
+              HERO_EASE,
+              "will-change-transform",
+              heroMode === "contact"
+                ? "blur-0 relative translate-y-0 scale-100 opacity-100"
+                : "pointer-events-none absolute inset-0 translate-y-6 scale-[0.985] opacity-0 blur-[1px]",
+            ].join(" ")}
+          >
+            <div className="glass-strong rounded-2xl p-5 md:p-6">
+              <div className="mb-4 flex items-center justify-between gap-3">
+                <h2 className="text-base font-semibold text-white">Contact</h2>
+
+                <button
+                  type="button"
+                  onClick={() => navigate("/", { replace: true })}
+                  className="rounded-lg border border-white/12 bg-white/5 px-3 py-1.5 text-sm text-white/80 transition hover:border-white/20 hover:bg-white/8 focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:outline-none"
+                >
+                  Back
+                </button>
+              </div>
+
+              <p className="text-sm leading-relaxed text-white/70">
+                If you want a developer who enjoys clean UI, solid structure,
+                and shipping real projects — hit me up.
+              </p>
+
+              <div className="mt-5 flex flex-wrap gap-2">
+                <a
+                  className="rounded-lg border border-white/12 bg-white/5 px-3 py-2 text-sm text-white/85 transition hover:border-white/20 hover:bg-white/8"
+                  href="mailto:remylian@gmail.com"
+                >
+                  <span className="inline-flex items-center gap-2">
+                    <img
+                      src={withBase("assets/mailicon.svg")}
+                      alt=""
+                      className="h-4 w-4 opacity-80"
+                    />
+                    Email
+                  </span>
+                </a>
+
+                <a
+                  className="rounded-lg border border-white/12 bg-white/5 px-3 py-2 text-sm text-white/85 transition hover:border-white/20 hover:bg-white/8"
+                  href="https://github.com/remylian"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span className="inline-flex items-center gap-2">
+                    <img
+                      src={withBase("assets/githublogo.svg")}
+                      alt=""
+                      className="h-4 w-4 opacity-80"
+                    />
+                    GitHub
+                  </span>
+                </a>
+
+                <a
+                  className="rounded-lg border border-white/12 bg-white/5 px-3 py-2 text-sm text-white/85 transition hover:border-white/20 hover:bg-white/8"
+                  href="https://www.linkedin.com/in/remy-lian-585518a1/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span className="inline-flex items-center gap-2">
+                    <img
+                      src={withBase("assets/linkedinlogo.svg")}
+                      alt=""
+                      className="h-4 w-4 opacity-80"
+                    />
+                    LinkedIn
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* DECK + PROJECTS */}
-      <section id="deck" className="mt-12">
+      <section id="deck" className="mt-16">
         <div className="container-page">
           <div className="mb-4 flex items-end justify-between gap-4">
             <div>
               <h2 className="text-xl font-semibold text-white">Project deck</h2>
               <p className="mt-1 text-sm text-white/65">
-                Browse projects like chapters. Open the TOC for quick
-                navigation.
+                Three required course projects — open each one to read the full
+                article page.
               </p>
             </div>
           </div>

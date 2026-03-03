@@ -1,5 +1,4 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { withBase } from "../../lib/paths";
 
 function navLinkClass({ isActive }: { isActive: boolean }) {
   return [
@@ -17,12 +16,6 @@ export default function Header() {
     <header className="sticky top-0 z-100 border-b border-white/10 bg-black/25 backdrop-blur">
       <div className="container-page flex items-center justify-between py-3">
         <Link to="/" className="group flex items-center gap-3">
-          <img
-            src={withBase("assets/logo-final.svg")}
-            alt="Portfolio logo"
-            className="h-9 w-9 rounded-xl border border-white/10 bg-white/5 p-1"
-            draggable={false}
-          />
           <div className="leading-tight">
             <div className="text-sm font-semibold tracking-wide text-white">
               Remy Lian
@@ -46,13 +39,13 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a
-            href="#contact"
-            className="rounded-lg border border-white/12 bg-white/5 px-3 py-2 text-sm text-white/85 transition hover:border-white/20 hover:bg-white/8"
-            style={{ boxShadow: "var(--glow)" }}
+          <button
+            type="button"
+            onClick={() => navigate("/#contact")}
+            className="rounded-md px-3 py-2 text-sm text-white/75 transition hover:bg-white/5 hover:text-white focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:outline-none"
           >
             Contact
-          </a>
+          </button>
         </div>
       </div>
     </header>

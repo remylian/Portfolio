@@ -10,7 +10,7 @@ export default function NotFoundPage() {
         to="/"
         className="mt-6 inline-flex rounded border border-zinc-900/30 bg-white/60 px-3 py-2 text-sm transition hover:bg-white/85"
       >
-        ← Back to home
+        Back to home
       </Link>
     </section>
   );
