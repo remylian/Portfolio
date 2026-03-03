@@ -1,5 +1,5 @@
-import { Link, NavLink } from "react-router-dom";
-// import { withBase } from "../../lib/paths";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { withBase } from "../../lib/paths";
 
 function navLinkClass({ isActive }: { isActive: boolean }) {
   return [
@@ -11,10 +11,18 @@ function navLinkClass({ isActive }: { isActive: boolean }) {
 }
 
 export default function Header() {
+  const navigate = useNavigate();
+
   return (
-    <header className="sticky top-0 z-[100] border-b border-white/10 bg-black/25 backdrop-blur">
+    <header className="sticky top-0 z-100 border-b border-white/10 bg-black/25 backdrop-blur">
       <div className="container-page flex items-center justify-between py-3">
         <Link to="/" className="group flex items-center gap-3">
+          <img
+            src={withBase("assets/logo-final.svg")}
+            alt="Portfolio logo"
+            className="h-9 w-9 rounded-xl border border-white/10 bg-white/5 p-1"
+            draggable={false}
+          />
           <div className="leading-tight">
             <div className="text-sm font-semibold tracking-wide text-white">
               Remy Lian
@@ -28,13 +36,13 @@ export default function Header() {
             Home
           </NavLink>
 
-          {/* About opens the hero swap via hash bridge */}
-          <Link
-            to="/#about"
+          <button
+            type="button"
+            onClick={() => navigate("/#about")}
             className="rounded-md px-3 py-2 text-sm text-white/75 transition hover:bg-white/5 hover:text-white focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:outline-none"
           >
             About
-          </Link>
+          </button>
         </nav>
 
         <div className="flex items-center gap-2">

@@ -2,14 +2,13 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { HashRouter } from "react-router-dom";
 
-import AppRoutes from "./app/routes/AppRoutes";
-
+import App from "./app/App";
 import "./index.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <HashRouter>
-      <AppRoutes />
+      <App />
     </HashRouter>
   </StrictMode>,
 );
