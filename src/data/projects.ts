@@ -32,105 +32,102 @@ const DECK_CARD_BG =
   "bg-[#0b1020] bg-gradient-to-br from-violet-500/20 via-transparent to-cyan-400/15";
 
 export const projects: readonly Project[] = [
-  // --- Existing deck projects (disabled by comment for the Portfolio assignment) ---
-  // {
-  //   id: 1,
-  //   title: "Rainydays",
-  //   theme: "link-1",
+  {
+    id: 1,
+    title: "Rainydays",
+    theme: "link-1",
 
-  //   shortDescription:
-  //     "A responsive storefront UI with clean layout and styling (placeholder).",
+    shortDescription:
+      "A responsive storefront UI with clean layout and styling (placeholder).",
 
-  //   imageSrc: "/assets/rainydays-logo.svg",
-  //   imageAlt: "Rainy Days project image",
-  //   imageCaption:
-  //     "Rainy Days — placeholder caption (replace with a real screenshot caption).",
+    imageSrc: "/assets/rainydays-logo.svg",
+    imageAlt: "Rainy Days project image",
+    imageCaption:
+      "Rainy Days — placeholder caption (replace with a real screenshot caption).",
 
-  //   logoSrc: "/assets/rainydays-logo.svg",
-  //   logoAlt: "Rainydays logo",
+    logoSrc: "/assets/rainydays-logo.svg",
+    logoAlt: "Rainydays logo",
 
-  //   bg: DECK_CARD_BG,
+    bg: DECK_CARD_BG,
 
-  //   transform: "translate-x-[15px] rotate-[2deg]",
-  //   mobileTransform:
-  //     "max-[900px]:translate-x-[0%] max-[900px]:translate-y-[-15%] max-[900px]:rotate-0",
+    transform: "translate-x-[15px] rotate-[2deg]",
+    mobileTransform:
+      "max-[900px]:translate-x-[0%] max-[900px]:translate-y-[-15%] max-[900px]:rotate-0",
 
-  //   z: "z-50",
-  //   origin: "origin-bottom-center",
+    z: "z-50",
+    origin: "origin-bottom-center",
 
-  //   repoUrl: "https://github.com/NoroffFEU/html-css-course-assignment-remylian",
-  //   liveUrl: "https://norofffeu.github.io/html-css-course-assignment-remylian/",
+    repoUrl: "https://github.com/NoroffFEU/html-css-course-assignment-remylian",
+    liveUrl: "https://norofffeu.github.io/html-css-course-assignment-remylian/",
 
-  //   infoTitle: "Rainydays",
-  //   infoContent:
-  //     "An online shop for outdoor jackets.\n\nFocus: layout, structure, and a clear product presentation.",
-  // },
-  // {
-  //   id: 2,
-  //   title: "Adventurer’s Alehouse",
-  //   theme: "link-2",
+    infoTitle: "Rainydays",
+    infoContent:
+      "An online shop for outdoor jackets.\n\nFocus: layout, structure, and a clear product presentation.",
+  },
+  {
+    id: 2,
+    title: "Adventurer’s Alehouse",
+    theme: "link-2",
 
-  //   shortDescription:
-  //     "A D&D-inspired tavern concept site blending fantasy theming with modern frontend architecture.",
+    shortDescription:
+      "A D&D-inspired tavern concept site blending fantasy theming with modern frontend architecture.",
 
-  //   imageSrc: "/assets/alehouse-hero.png",
-  //   imageAlt: "Adventurer's Alehouse homepage hero section",
-  //   imageCaption:
-  //     "Adventurer’s Alehouse — fantasy tavern concept site with immersive theming.",
+    imageSrc: "/assets/alehouse-hero.png",
+    imageAlt: "Adventurer's Alehouse homepage hero section",
+    imageCaption:
+      "Adventurer’s Alehouse — fantasy tavern concept site with immersive theming.",
 
-  //   logoSrc: "/assets/logo.svg",
-  //   logoAlt: "Adventurer’s Alehouse logo",
+    logoSrc: "/assets/logo.svg",
+    logoAlt: "Adventurer’s Alehouse logo",
 
-  //   bg: DECK_CARD_BG,
+    bg: DECK_CARD_BG,
 
-  //   transform: "translate-x-[-140px] -rotate-[55deg]",
-  //   mobileTransform:
-  //     "max-[900px]:translate-x-[-25%] max-[900px]:translate-y-[-10%] max-[900px]:rotate-0",
+    transform: "translate-x-[-140px] -rotate-[55deg]",
+    mobileTransform:
+      "max-[900px]:translate-x-[-25%] max-[900px]:translate-y-[-10%] max-[900px]:rotate-0",
 
-  //   z: "z-40",
-  //   origin: "origin-bottom",
+    z: "z-40",
+    origin: "origin-bottom",
 
-  //   repoUrl: "https://github.com/NoroffFEU/FED1-PE1-remylian",
-  //   liveUrl: "https://norofffeu.github.io/FED1-PE1-remylian/",
+    repoUrl: "https://github.com/NoroffFEU/FED1-PE1-remylian",
+    liveUrl: "https://norofffeu.github.io/FED1-PE1-remylian/",
 
-  //   infoTitle: "Adventurer’s Alehouse",
-  //   infoContent:
-  //     "A themed blog-style site.\n\nFocus: content structure and cohesive visual identity.",
-  // },
-  // {
-  //   id: 3,
-  //   title: "Community Science Museum",
-  //   theme: "link-3",
+    infoTitle: "Adventurer’s Alehouse",
+    infoContent:
+      "A themed blog-style site.\n\nFocus: content structure and cohesive visual identity.",
+  },
+  {
+    id: 3,
+    title: "Community Science Museum",
+    theme: "link-3",
 
-  //   shortDescription:
-  //     "A responsive community museum site focused on accessibility, structure, and clear content hierarchy.",
+    shortDescription:
+      "A responsive community museum site focused on accessibility, structure, and clear content hierarchy.",
 
-  //   imageSrc: "/assets/community-museum-hero.png",
-  //   imageAlt: "Community Museum homepage showcasing exhibitions",
-  //   imageCaption:
-  //     "Community Museum — responsive layout built with accessibility in focus.",
+    imageSrc: "/assets/community-museum-hero.png",
+    imageAlt: "Community Museum homepage showcasing exhibitions",
+    imageCaption:
+      "Community Museum — responsive layout built with accessibility in focus.",
 
-  //   logoSrc: "/assets/logo-final.svg",
-  //   logoAlt: "Community Science Museum logo",
+    logoSrc: "/assets/logo-final.svg",
+    logoAlt: "Community Science Museum logo",
 
-  //   bg: DECK_CARD_BG,
+    bg: DECK_CARD_BG,
 
-  //   transform: "translate-x-[250px] rotate-[15deg]",
-  //   mobileTransform:
-  //     "max-[900px]:translate-x-[25%] max-[900px]:translate-y-[-20%] max-[900px]:rotate-0",
+    transform: "translate-x-[250px] rotate-[15deg]",
+    mobileTransform:
+      "max-[900px]:translate-x-[25%] max-[900px]:translate-y-[-20%] max-[900px]:rotate-0",
 
-  //   z: "z-30",
-  //   origin: "origin-bottom-center",
+    z: "z-30",
+    origin: "origin-bottom-center",
 
-  //   repoUrl: "https://github.com/remylian/Semester-project-1",
-  //   liveUrl: "https://remylian.github.io/Semester-project-1/index.html",
+    repoUrl: "https://github.com/remylian/Semester-project-1",
+    liveUrl: "https://remylian.github.io/Semester-project-1/index.html",
 
-  //   infoTitle: "Community Science Museum",
-  //   infoContent:
-  //     "A semester project.\n\nFocus: accessibility, responsive design, and navigation.",
-  // },
-
-  // --- Brief-required featured projects ---
+    infoTitle: "Community Science Museum",
+    infoContent:
+      "A semester project.\n\nFocus: accessibility, responsive design, and navigation.",
+  },
 
   {
     id: 4,
